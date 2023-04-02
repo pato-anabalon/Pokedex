@@ -2,11 +2,73 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
+    <link rel="stylesheet" href="bootstrap-grid.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="main.js" type="module"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <script src="main.js" type="module"></script>
+    <div id="loader" class="loader">
+      <div class="loader__container">
+        <div class="loader__pokeball"></div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="header__finder">
+        <img src="./assets/images/find-icon.png" />
+        <input type="text" class="header__input" id="headerInput" />
+      </div>
+      <div class="header__sorter">
+        <button class="header__sort-button" id="headerSortButton">
+          <img src="./assets/images/sort-icon.png" />
+        </button>
+      </div>
+      <div class="header__menu" id="nav">
+        <div class="header__banner">
+          <img src="./assets/images/menu-background.jpeg" alt="image" />
+        </div>
+        <nav class="header__nav">
+          <ul>
+            <li><a href="#" data-text="Home">Home</a></li>
+            <li><a href="#" data-text="About">About</a></li>
+            <li><a href="#" data-text="Services">Services</a></li>
+            <li><a href="#" data-text="Contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <span class="header__toggle" id="toggle"></span>
+    </header>
+    <div class="container-fluid">
+      <main class="main">
+        <section
+          class="main__section row row-cols-2"
+          id="mainSection"
+        ></section>
+      </main>
+    </div>
+    <footer class="footer">
+      <div class="footer__container"></div>
+    </footer>
+
+    <template id="templatePokecard">
+      <a class="pokecard col-12 col-md-4 col-xl-2">
+        <div class="pokecard__container">
+          <div class="pokecard__title">
+            <label for="" class="pokecard__number"></label>
+          </div>
+          <div class="pokecard__body">
+            <label for="" class="pokecard__name"></label>
+          </div>
+          <div class="pokecard__silhouette">
+            <img
+              src="./assets/images/silhouette.png"
+              alt=""
+              class="pokecard__image"
+            />
+          </div>
+        </div>
+      </a>
+    </template>
   </body>
 </html>

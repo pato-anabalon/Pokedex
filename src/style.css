@@ -1,5 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@200;400;500;600;700&display=swap');
 * {
-    border: 0;
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Teko', sans-serif;
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: fixed;
+  z-index: 999;
+  animation: all 1.5s;
+}
+
+.loader__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.loader__pokeball {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid;
+  animation: frames 0.8s linear 0s infinite;
+}
+
+.loader__pokeball:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  border-bottom: 2px solid;
+}
+
+.loader__pokeball:before {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+  border: 2px solid;
+  border-radius: 50%;
+  bottom: 23px;
+  right: 23px;
+  z-index: 1;
+}
+
+/* AnimationFrames */
+@keyframes frames {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  background-color: #dc0a2d;
+  width: 100%;
+  height: 100px;
+  position: fixed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px 16px;
+  z-index: 2;
+}
+
+.header + .main {
+  padding-top: 150px;
+}
+
+.header__finder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 60%;
+  max-width: 400px;
+  height: 40px;
+  background: #ffffff;
+  transition: all 0.3s ease 0s;
+  border-radius: 16px;
+}
+
+.header__finder:hover {
+  box-shadow: inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.header__input {
+  width: 148px;
+  height: 16px;
+  color: #666666;
+  border: none;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
+.header__input:focus {
+  outline: none;
+}
+
+.header__sorter {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin: 0px 8px;
+  transition: all 0.3s ease 0s;
+
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+}
+
+.header__sorter:hover {
+  box-shadow: inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.header__sort-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.header__menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  transition: 0.5s;
+}
+
+.header__menu.active {
+  top: -100%;
+}
+
+.header__menu .header__banner {
+  position: relative;
+  width: 600px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header__menu .header__banner img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__menu .header__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.header__menu .header__nav ul {
+  position: relative;
+}
+
+.header__menu .header__nav ul li {
+  position: relative;
+  list-style: none;
+  padding: 0 20px;
+  margin: 5px 0;
+  overflow: hidden;
+  display: table;
+}
+
+.header__menu .header__nav ul li:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff0047;
+  transition: transform 0.5s ease-in-out;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.header__menu .header__nav ul li:hover:before {
+  transition: transform 0.5s ease-in-out;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.header__menu .header__nav ul li a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-size: 4em;
+  font-weight: 700;
+  line-height: 1em;
+  display: inline-block;
+  text-transform: uppercase;
+  transition: 0.5s ease-in-out;
+}
+
+.header__menu .header__nav ul li a::before {
+  content: attr(data-text);
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  color: #fff;
+}
+
+.header__menu .header__nav ul li:hover a {
+  transform: translateY(-100%);
+  color: fff;
+}
+
+.header__toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #fff url(./assets/images/menu-close.png);
+  background-size: 40px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: 10px;
+}
+
+.header__toggle.active {
+  background: #fff url(./assets/images/menu-open.png);
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 10px;
+}
+
+@media (max-width: 991px) {
+  .header__banner {
+    display: none;
+  }
+}
+
+.main {
+  padding-top: 130px;
+}
+
+.main__section {
+  justify-content: space-evenly;
+}
+
+.pokecard {
+  height: 150px;
+  top: 0;
+  margin: 1rem 0;
+  position: relative;
+  transition: all 0.3s ease 0s;
+}
+.pokecard:hover {
+  top: -0.5rem;
+  filter: drop-shadow(2px 6px 5px rgba(0, 0, 0, 0.2));
+}
+
+.pokecard__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  isolation: isolate;
+
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  /* Inside auto layout */
+  z-index: -1;
+  position: relative;
+}
+
+.pokecard__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 4px 8px 0px;
+
+  width: 100%;
+  height: 1.5rem;
+  color: #666666;
+  z-index: 0;
+}
+
+.pokecard__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 8px 4px;
+
+  width: 100%;
+  height: 40%;
+
+  background: #efefef;
+  border-radius: 7px;
+
+  /* Inside auto layout */
+  order: 1;
+  z-index: 1;
+}
+
+.pokecard__name {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  width: 100%;
+
+  /* Grayscale/Dark */
+  color: #666666;
+  text-align: center;
+}
+
+.pokecard__number {
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.pokecard__silhouette {
+  position: relative;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.pokecard__image {
+  position: absolute;
+  width: 105px;
+}
+
+.footer {
+}
+.footer__container {
 }
